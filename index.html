@@ -1,83 +1,160 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLATFORM</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+box-sizing: border-box;
+font-family: Arial, sans-serif;
+}
     html, body {
-      height: 100%;
+    html {
+height: 100%;
+width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* Black to deep purple/blue */
+    }
+    body {
+      min-height: 200vh; /* Double screen height for scrolling */
       width: 100%;
+      overflow-y: auto; /* Enable vertical scrolling */
       overflow-x: hidden;
-      background: #000;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+animation: gradientShift 20s ease infinite;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    h1 {
-      font-size: 10vw;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    p {
-      font-size: 5vw;
-      margin-top: 10px;
-    }
-    .menu {
+}
+body::before {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+      height: 100%;
+      background: #1a1a2e; /* Fallback dark */
+      height: 100%; /* Covers initial viewport */
+      background: #1a1a2e;
+z-index: -1;
+}
+#scene {
+      height: 100vh;
+      height: 100vh; /* Full viewport height for hero */
+width: 100vw;
+      position: relative;
+      position: sticky; /* Stays at top while scrolling */
+      top: 0;
+overflow: hidden;
+      z-index: 0;
+}
+.shape {
+position: absolute;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Darker shadow */
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+transition: transform 0.1s ease;
+}
+.sphere {
+@@ -97,21 +105,21 @@
+font-size: 1.6rem;
+font-weight: 300;
+margin-top: 15px;
+      color: #d8e0ff; /* Lighter for contrast on dark bg */
+      color: #d8e0ff;
+}
+nav {
       position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-    .menu button {
-      background: #fff;
-      color: #000;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      font-size: 4vw;
-      cursor: pointer;
-    }
-    .menu-content {
-      display: none;
-      position: absolute;
-      top: 40px;
-      right: 10px;
-      background: #fff;
-      color: #000;
-      border-radius: 5px;
-      text-align: left;
-    }
-    .menu-content a {
-      display: block;
+      top: 20px; /* Slightly lower for mobile visibility */
+      position: sticky; /* Sticks with scene */
+      top: 20px;
+width: 100%;
+      max-width: 100vw; /* Prevent overflow */
+      max-width: 100vw;
+display: flex;
+      flex-wrap: wrap; /* Allow wrapping on small screens */
+      flex-wrap: wrap;
+justify-content: center;
+      gap: 20px; /* Tighter gap for mobile */
+      padding: 10px; /* Add padding to avoid edge clipping */
+      gap: 20px;
       padding: 10px;
-      font-size: 3.5vw;
-      text-decoration: none;
-      color: #000;
+opacity: 0;
+transition: opacity 0.5s ease;
+      z-index: 20; /* Above shapes */
+      z-index: 20;
+}
+nav a {
+color: #fff;
+@@ -126,6 +134,27 @@
+background: rgba(255, 255, 255, 0.2);
+transform: scale(1.05);
+}
+    #content {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      z-index: 5; /* Above scene */
+      background: rgba(255, 255, 255, 0.05); /* Slight overlay for contrast */
+      border-radius: 10px;
     }
-    .menu:hover .menu-content {
-      display: block;
+    #content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #fff;
     }
-  </style>
+    #content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #d8e0ff;
+      margin-bottom: 20px;
+    }
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-30px); }
+@@ -141,30 +170,17 @@
+h1 { font-size: 4rem; }
+p { font-size: 1.3rem; }
+.shape { transform: scale(0.8); }
+      nav { 
+        gap: 15px; 
+        padding: 15px; 
+        top: 10px; 
+      }
+      nav a { 
+        font-size: 1.1rem; 
+        padding: 6px 15px; 
+      }
+      nav { gap: 15px; padding: 15px; top: 10px; }
+      nav a { font-size: 1.1rem; padding: 6px 15px; }
+      #content h2 { font-size: 2rem; }
+      #content p { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+h1 { font-size: 2.8rem; }
+p { font-size: 1rem; }
+.shape { transform: scale(0.6); }
+      nav { 
+        flex-direction: column; /* Stack on very small screens */
+        gap: 10px; 
+        padding: 10px; 
+        top: 5px; 
+      }
+      nav a { 
+        font-size: 1rem; 
+        padding: 5px 12px; 
+      }
+      nav { flex-direction: column; gap: 10px; padding: 10px; top: 5px; }
+      nav a { font-size: 1rem; padding: 5px 12px; }
+}
+</style>
 </head>
-<body>
-  <div class="menu">
-    <button>Menu</button>
-    <div class="menu-content">
-      <a href="#">Home</a>
-      <a href="#">Features</a>
-      <a href="#">Contact</a>
-    </div>
+@@ -185,6 +201,14 @@ <h1>SLATFORM</h1>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+  <div id="content">
+    <h2>Welcome to SLATFORM</h2>
+    <p>SLATFORM is a cutting-edge platform designed to push the boundaries of digital interaction. Scroll down to discover what makes us unique.</p>
+    <h2>Features</h2>
+    <p>Experience dynamic visuals, seamless interactivity, and a design that adapts to your every move. Our technology blends form and function like never before.</p>
+    <h2>Our Vision</h2>
+    <p>We’re here to redefine how you engage with the web. From floating shapes to intuitive navigation, SLATFORM is your gateway to the future.</p>
   </div>
-  <h1>SLATFORM</h1>
-  <p>Explore the Future of Interaction</p>
-</body>
-</html>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+console.log('SLATFORM loaded');
