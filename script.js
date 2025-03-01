@@ -1,15 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('SLATFORM loaded'); // Debug to confirm script runs
+    console.log('SLATFORM loaded');
   
     const nav = document.querySelector('nav');
     const shapes = document.querySelectorAll('.shape');
   
-    // Fade in navigation
     setTimeout(() => {
       nav.classList.add('visible');
     }, 1000);
   
-    // Mouse-based shape movement
     document.addEventListener('mousemove', (e) => {
       const { clientX: x, clientY: y } = e;
       const width = window.innerWidth;
@@ -28,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   
-    // Reset transform on mouse leave
     document.addEventListener('mouseleave', () => {
       shapes.forEach(shape => {
         shape.style.transform = 'translate(0, 0)';
