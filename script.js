@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('SLATFORM loaded'); // Debug to confirm script runs
+  
     const nav = document.querySelector('nav');
     const shapes = document.querySelectorAll('.shape');
   
@@ -19,16 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
   
-        // Calculate offset based on mouse position
         const moveX = ((x - width / 2) / width) * 50 * depth;
         const moveY = ((y - height / 2) / height) * 50 * depth;
   
-        // Apply transform, layering with CSS float animation
         shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
     });
   
-    // Reset transform on mouse leave to avoid sticking
+    // Reset transform on mouse leave
     document.addEventListener('mouseleave', () => {
       shapes.forEach(shape => {
         shape.style.transform = 'translate(0, 0)';
