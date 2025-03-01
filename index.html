@@ -9,90 +9,162 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      font-family: Arial, sans-serif;
     }
-    body {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
       color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
     }
     #scene {
-      position: absolute;
-      width: 100vw;
       height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
       overflow: hidden;
-      z-index: -1;
+      z-index: 0;
     }
     .shape {
       position: absolute;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-      animation: float 10s ease-in-out infinite alternate;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.1s ease;
     }
-    .shape:nth-child(1) { width: 200px; height: 200px; top: 20%; left: 10%; }
-    .shape:nth-child(2) { width: 150px; height: 150px; top: 70%; left: 80%; }
-    .shape:nth-child(3) { width: 250px; height: 250px; top: 40%; left: 50%; }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-30px); }
+    .sphere {
+      width: 12vw;
+      height: 12vw;
+      background: radial-gradient(circle, #ffffff22, #16213e);
+      animation: float 6s ease-in-out infinite;
+    }
+    .cube {
+      width: 10vw;
+      height: 10vw;
+      background: linear-gradient(45deg, #0f3460, #16213e);
+      transform: rotate(45deg);
+      border-radius: 15px;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+    .torus {
+      width: 18vw;
+      height: 18vw;
+      background: radial-gradient(circle, #ffffff18, #0f3460);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      animation: float 7s ease-in-out infinite;
     }
     header {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
+      color: #fff;
       z-index: 10;
     }
     h1 {
-      font-size: 5rem;
-      font-weight: bold;
+      font-size: 8vw;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 2s ease-in-out;
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
     }
     p {
-      font-size: 1.5rem;
-      margin-top: 10px;
-      color: #cbd5e1;
-      animation: fadeIn 3s ease-in-out;
+      font-size: 4vw;
+      color: #d8e0ff;
     }
-    .button {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .dropdown {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+    }
+    .dropdown-btn {
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
-      background: rgba(255, 255, 255, 0.15);
+      font-size: 4vw;
+      padding: 10px 15px;
       border: none;
-      border-radius: 50px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: 0.3s;
     }
-    .button:hover {
-      background: rgba(255, 255, 255, 0.3);
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      min-width: 160px;
+      text-align: center;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .dropdown-content a {
+      color: #fff;
+      font-size: 3.5vw;
+      padding: 10px;
+      display: block;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    #content {
+      position: relative;
+      width: 90%;
+      margin: 60px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    #content h2 {
+      font-size: 5vw;
+      margin-bottom: 10px;
+    }
+    #content p {
+      font-size: 3.5vw;
+      line-height: 1.6;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @media (max-width: 768px) {
+      .shape { transform: scale(0.8); }
+      .dropdown-btn { font-size: 3.5vw; padding: 8px; }
+      .dropdown-content a { font-size: 3vw; padding: 8px; }
+      #content h2 { font-size: 4vw; }
+      #content p { font-size: 3vw; }
+    }
+    @media (max-width: 480px) {
+      .shape { transform: scale(0.6); }
+      .dropdown-btn { font-size: 3vw; padding: 6px; }
+      .dropdown-content a { font-size: 2.8vw; padding: 6px; }
     }
   </style>
 </head>
 <body>
   <div id="scene">
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
+    <div class="shape sphere"></div>
+    <div class="shape cube"></div>
+    <div class="shape torus"></div>
   </div>
   <header>
     <h1>SLATFORM</h1>
     <p>Explore the Future of Interaction</p>
-    <button class="button">Get Started</button>
   </header>
+  <div class="dropdown">
+    <button class="dropdown-btn">Menu</button>
+    <div class="dropdown-content">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div id="content">
+    <h2>Welcome to SLATFORM</h2>
+    <p>SLATFORM is a cutting-edge platform designed to push the boundaries of digital interaction.</p>
+  </div>
 </body>
 </html>
