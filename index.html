@@ -3,21 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLATFORM</title>
+  <title>SLATFORM - Home</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    html, body { height: 100%; width: 100%; overflow-x: hidden; }
     body {
-      min-height: 200vh;
+      min-height: 100vh;
       overflow-y: auto;
       background: linear-gradient(135deg, #151525, #121a32, #0c2a4d);
       animation: gradientShift 20s ease infinite;
@@ -25,165 +16,40 @@
       line-height: 1.5;
     }
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(21, 21, 37, 0.8);
-      z-index: -1;
+      content: ''; position: fixed; inset: 0;
+      background: rgba(21, 21, 37, 0.8); z-index: -1;
     }
     #scene {
-      height: 100vh;
-      width: 100vw;
-      position: sticky;
-      top: 0;
-      overflow: hidden;
-      z-index: 0;
+      height: 100vh; width: 100vw; position: sticky; top: 0;
+      overflow: hidden; z-index: 0;
     }
     .shape {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      position: absolute; background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       will-change: transform;
     }
-    .sphere {
-      width: 160px;
-      height: 160px;
-      top: 15%;
-      left: 20%;
-      background: radial-gradient(circle at 30% 30%, rgba(50, 50, 80, 0.2), #121a32);
-      animation: float 6s ease-in-out infinite;
-    }
-    .cube {
-      width: 130px;
-      height: 130px;
-      top: 65%;
-      left: 70%;
-      background: linear-gradient(45deg, #0c2a4d, #121a32);
-      transform: rotate(45deg);
-      border-radius: 15px;
-      animation: float 8s ease-in-out infinite reverse;
-    }
-    .torus {
-      width: 220px;
-      height: 220px;
-      top: 40%;
-      left: 35%;
-      background: radial-gradient(circle, rgba(40, 40, 60, 0.15), #0c2a4d);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      animation: float 7s ease-in-out infinite;
-    }
-    .sphere.small {
-      width: 90px;
-      height: 90px;
-      top: 75%;
-      left: 85%;
-      background: radial-gradient(circle at 70% 70%, rgba(60, 60, 90, 0.25), #151525);
-      animation: float 5s ease-in-out infinite reverse;
-    }
-    header {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: #fff;
-      z-index: 10;
-    }
-    h1 {
-      font-size: clamp(2.8rem, 10vw, 6rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-    }
-    p {
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      font-weight: 300;
-      margin-top: 10px;
-      color: #c0c8ff;
-    }
-    .dropdown {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 20;
-    }
-    .dropdown-btn {
-      background: rgba(255, 255, 255, 0.15);
-      color: #e6e6ff;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 8px 18px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .dropdown-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(18, 26, 50, 0.9);
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-      min-width: 150px;
-    }
-    .dropdown-content a {
-      color: #e6e6ff;
-      font-size: 1.1rem;
-      padding: 8px 16px;
-      text-decoration: none;
-      display: block;
-      transition: background 0.3s ease;
-    }
-    .dropdown-content a:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    #content {
-      position: relative;
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 40px 20px;
-      z-index: 5;
-      background: rgba(18, 26, 50, 0.7);
-      border-radius: 8px;
-    }
-    #content h2 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 15px;
-      color: #fff;
-    }
-    #content p {
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      color: #c0c8ff;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-25px); }
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @media (max-width: 768px) {
-      .shape { transform: scale(0.85); }
-      .dropdown-btn { font-size: 1.1rem; padding: 7px 15px; }
-    }
-    @media (max-width: 480px) {
-      .shape { transform: scale(0.65); }
-      .dropdown-btn { font-size: 1rem; padding: 6px 12px; }
-    }
+    .sphere { width: 160px; height: 160px; top: 15%; left: 20%; background: radial-gradient(circle at 30% 30%, rgba(50, 50, 80, 0.2), #121a32); animation: float 6s ease-in-out infinite; }
+    .cube { width: 130px; height: 130px; top: 65%; left: 70%; background: linear-gradient(45deg, #0c2a4d, #121a32); transform: rotate(45deg); border-radius: 15px; animation: float 8s ease-in-out infinite reverse; }
+    .torus { width: 220px; height: 220px; top: 40%; left: 35%; background: radial-gradient(circle, rgba(40, 40, 60, 0.15), #0c2a4d); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); animation: float 7s ease-in-out infinite; }
+    .sphere.small { width: 90px; height: 90px; top: 75%; left: 85%; background: radial-gradient(circle at 70% 70%, rgba(60, 60, 90, 0.25), #151525); animation: float 5s ease-in-out infinite reverse; }
+    header { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; z-index: 10; }
+    h1 { font-size: clamp(2.8rem, 10vw, 6rem); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); }
+    p { font-size: clamp(1rem, 3vw, 1.6rem); font-weight: 300; margin-top: 10px; color: #c0c8ff; }
+    .dropdown { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 20; }
+    .dropdown-btn { background: rgba(255, 255, 255, 0.15); color: #e6e6ff; font-size: 1.2rem; font-weight: 600; padding: 8px 18px; border: none; border-radius: 20px; cursor: pointer; transition: background 0.3s ease; }
+    .dropdown-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(18, 26, 50, 0.9); border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); min-width: 150px; }
+    .dropdown-content a { color: #e6e6ff; font-size: 1.1rem; padding: 8px 16px; text-decoration: none; display: block; transition: background 0.3s ease; }
+    .dropdown-content a:hover { background: rgba(255, 255, 255, 0.15); }
+    .dropdown-content a.active { background: rgba(255, 255, 255, 0.25); color: #fff; }
+    .dropdown:hover .dropdown-content { display: block; }
+    #content { position: relative; max-width: 1200px; margin: 40px auto; padding: 40px 20px; z-index: 5; background: rgba(18, 26, 50, 0.7); border-radius: 8px; }
+    #content h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 15px; color: #fff; }
+    #content p { font-size: clamp(0.9rem, 2vw, 1.2rem); color: #c0c8ff; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @media (max-width: 768px) { .shape { transform: scale(0.85); } .dropdown-btn { font-size: 1.1rem; padding: 7px 15px; } }
+    @media (max-width: 480px) { .shape { transform: scale(0.65); } .dropdown-btn { font-size: 1rem; padding: 6px 12px; } }
   </style>
 </head>
 <body>
@@ -200,18 +66,14 @@
   <div class="dropdown">
     <button class="dropdown-btn">Menu</button>
     <div class="dropdown-content">
-      <a href="#home">Home</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="features.html">Features</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
   <div id="content">
     <h2>Welcome to SLATFORM</h2>
-    <p>SLATFORM is a cutting-edge platform designed to push the boundaries of digital interaction. Scroll down to discover what makes us unique.</p>
-    <h2>Features</h2>
-    <p>Experience dynamic visuals, seamless interactivity, and a design that adapts to your every move. Our technology blends form and function like never before.</p>
-    <h2>Our Vision</h2>
-    <p>We’re here to redefine how you engage with the web. From floating shapes to intuitive navigation, SLATFORM is your gateway to the future.</p>
+    <p>SLATFORM is a cutting-edge platform designed to push the boundaries of digital interaction. Explore our features or get in touch to learn more.</p>
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -221,7 +83,6 @@
         const { innerWidth: width, innerHeight: height } = window;
         shapes.forEach(shape => {
           const depth = parseFloat(shape.dataset.depth || 0.8);
-          const rect = shape.getBoundingClientRect();
           const moveX = ((x - width / 2) / width) * 40 * depth;
           const moveY = ((y - height / 2) / height) * 40 * depth;
           shape.style.transform = `translate(${moveX}px, ${moveY}px)`;

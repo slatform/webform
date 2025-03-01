@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLATFORM - Features</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    html, body { height: 100%; width: 100%; overflow-x: hidden; }
+    body {
+      min-height: 100vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #151525, #121a32, #0c2a4d);
+      animation: gradientShift 20s ease infinite;
+      color: #e6e6ff;
+      line-height: 1.5;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background: rgba(21, 21, 37, 0.8); z-index: -1;
+    }
+    .dropdown { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 20; }
+    .dropdown-btn { background: rgba(255, 255, 255, 0.15); color: #e6e6ff; font-size: 1.2rem; font-weight: 600; padding: 8px 18px; border: none; border-radius: 20px; cursor: pointer; transition: background 0.3s ease; }
+    .dropdown-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(18, 26, 50, 0.9); border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); min-width: 150px; }
+    .dropdown-content a { color: #e6e6ff; font-size: 1.1rem; padding: 8px 16px; text-decoration: none; display: block; transition: background 0.3s ease; }
+    .dropdown-content a:hover { background: rgba(255, 255, 255, 0.15); }
+    .dropdown-content a.active { background: rgba(255, 255, 255, 0.25); color: #fff; }
+    .dropdown:hover .dropdown-content { display: block; }
+    #content { position: relative; max-width: 1200px; margin: 80px auto 40px; padding: 40px 20px; z-index: 5; }
+    #content h1 { font-size: clamp(2rem, 5vw, 3.5rem); color: #fff; text-align: center; margin-bottom: 40px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card { background: rgba(18, 26, 50, 0.9); padding: 20px; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
+    .feature-card h2 { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+    .feature-card p { font-size: 1rem; color: #c0c8ff; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @media (max-width: 768px) { .dropdown-btn { font-size: 1.1rem; padding: 7px 15px; } }
+    @media (max-width: 480px) { .dropdown-btn { font-size: 1rem; padding: 6px 12px; } }
+  </style>
+</head>
+<body>
+  <div class="dropdown">
+    <button class="dropdown-btn">Menu</button>
+    <div class="dropdown-content">
+      <a href="index.html">Home</a>
+      <a href="features.html" class="active">Features</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div id="content">
+    <h1>Our Features</h1>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h2>Dynamic Visuals</h2>
+        <p>Experience interactive elements that respond to your movements, creating a truly immersive web experience.</p>
+      </div>
+      <div class="feature-card">
+        <h2>Seamless Interactivity</h2>
+        <p>Navigate effortlessly with intuitive controls and responsive design tailored to your device.</p>
+      </div>
+      <div class="feature-card">
+        <h2>Adaptive Design</h2>
+        <p>Our platform adjusts to your preferences, ensuring a personalized and fluid interaction every time.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
