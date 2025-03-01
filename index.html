@@ -9,29 +9,26 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
     }
-    html {
+    html, body {
       height: 100%;
       width: 100%;
+      overflow-x: hidden;
     }
     body {
       min-height: 200vh;
-      width: 100%;
       overflow-y: auto;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      background: linear-gradient(135deg, #151525, #121a32, #0c2a4d);
       animation: gradientShift 20s ease infinite;
-      color: #fff;
+      color: #e6e6ff;
+      line-height: 1.5;
     }
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1a1a2e;
+      inset: 0;
+      background: rgba(21, 21, 37, 0.8);
       z-index: -1;
     }
     #scene {
@@ -44,17 +41,17 @@
     }
     .shape {
       position: absolute;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 50%;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-      transition: transform 0.1s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      will-change: transform;
     }
     .sphere {
       width: 160px;
       height: 160px;
       top: 15%;
       left: 20%;
-      background: radial-gradient(circle at 30% 30%, #ffffff22, #16213e);
+      background: radial-gradient(circle at 30% 30%, rgba(50, 50, 80, 0.2), #121a32);
       animation: float 6s ease-in-out infinite;
     }
     .cube {
@@ -62,7 +59,7 @@
       height: 130px;
       top: 65%;
       left: 70%;
-      background: linear-gradient(45deg, #0f3460, #16213e);
+      background: linear-gradient(45deg, #0c2a4d, #121a32);
       transform: rotate(45deg);
       border-radius: 15px;
       animation: float 8s ease-in-out infinite reverse;
@@ -72,7 +69,7 @@
       height: 220px;
       top: 40%;
       left: 35%;
-      background: radial-gradient(circle, #ffffff18, #0f3460);
+      background: radial-gradient(circle, rgba(40, 40, 60, 0.15), #0c2a4d);
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
       animation: float 7s ease-in-out infinite;
     }
@@ -81,7 +78,7 @@
       height: 90px;
       top: 75%;
       left: 85%;
-      background: radial-gradient(circle at 70% 70%, #ffffff33, #1a1a2e);
+      background: radial-gradient(circle at 70% 70%, rgba(60, 60, 90, 0.25), #151525);
       animation: float 5s ease-in-out infinite reverse;
     }
     header {
@@ -92,41 +89,40 @@
       text-align: center;
       color: #fff;
       z-index: 10;
-      pointer-events: none;
     }
     h1 {
-      font-size: 6rem;
+      font-size: clamp(2.8rem, 10vw, 6rem);
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+      letter-spacing: 2px;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     }
     p {
-      font-size: 1.6rem;
+      font-size: clamp(1rem, 3vw, 1.6rem);
       font-weight: 300;
-      margin-top: 15px;
-      color: #d8e0ff;
+      margin-top: 10px;
+      color: #c0c8ff;
     }
     .dropdown {
-      position: fixed; /* Fixed at top */
+      position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 20;
     }
     .dropdown-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #e6e6ff;
+      font-size: 1.2rem;
       font-weight: 600;
-      padding: 10px 20px;
+      padding: 8px 18px;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .dropdown-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
     }
     .dropdown-content {
       display: none;
@@ -134,51 +130,46 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      min-width: 160px;
-      z-index: 1;
+      background: rgba(18, 26, 50, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      min-width: 150px;
     }
     .dropdown-content a {
-      color: #fff;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 10px 20px;
+      color: #e6e6ff;
+      font-size: 1.1rem;
+      padding: 8px 16px;
       text-decoration: none;
       display: block;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .dropdown-content a:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
     }
     .dropdown:hover .dropdown-content {
-      display: block; /* Show on hover */
+      display: block;
     }
     #content {
       position: relative;
-      width: 100%;
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 20px;
+      margin: 40px auto;
+      padding: 40px 20px;
       z-index: 5;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
+      background: rgba(18, 26, 50, 0.7);
+      border-radius: 8px;
     }
     #content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      margin-bottom: 15px;
       color: #fff;
     }
     #content p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: #d8e0ff;
-      margin-bottom: 20px;
+      font-size: clamp(0.9rem, 2vw, 1.2rem);
+      color: #c0c8ff;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-30px); }
+      50% { transform: translateY(-25px); }
     }
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
@@ -186,29 +177,21 @@
       100% { background-position: 0% 50%; }
     }
     @media (max-width: 768px) {
-      h1 { font-size: 4rem; }
-      p { font-size: 1.3rem; }
-      .shape { transform: scale(0.8); }
-      .dropdown-btn { font-size: 1.1rem; padding: 8px 15px; }
-      .dropdown-content a { font-size: 1rem; padding: 8px 15px; }
-      #content h2 { font-size: 2rem; }
-      #content p { font-size: 1rem; }
+      .shape { transform: scale(0.85); }
+      .dropdown-btn { font-size: 1.1rem; padding: 7px 15px; }
     }
     @media (max-width: 480px) {
-      h1 { font-size: 2.8rem; }
-      p { font-size: 1rem; }
-      .shape { transform: scale(0.6); }
+      .shape { transform: scale(0.65); }
       .dropdown-btn { font-size: 1rem; padding: 6px 12px; }
-      .dropdown-content a { font-size: 0.9rem; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
   <div id="scene">
-    <div class="shape sphere" data-depth="0.8"></div>
-    <div class="shape cube" data-depth="0.6"></div>
-    <div class="shape torus" data-depth="1.0"></div>
-    <div class="shape sphere small" data-depth="0.9"></div>
+    <div class="shape sphere"></div>
+    <div class="shape cube"></div>
+    <div class="shape torus"></div>
+    <div class="shape sphere small"></div>
   </div>
   <header>
     <h1>SLATFORM</h1>
@@ -232,35 +215,16 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('SLATFORM loaded');
-
       const shapes = document.querySelectorAll('.shape');
-
-      setTimeout(() => {
-        document.querySelector('.dropdown').style.opacity = '1';
-      }, 1000);
-
-      document.addEventListener('mousemove', (e) => {
+      window.addEventListener('mousemove', (e) => {
         const { clientX: x, clientY: y } = e;
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
+        const { innerWidth: width, innerHeight: height } = window;
         shapes.forEach(shape => {
-          const depth = parseFloat(shape.getAttribute('data-depth'));
+          const depth = parseFloat(shape.dataset.depth || 0.8);
           const rect = shape.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
-
-          const moveX = ((x - width / 2) / width) * 50 * depth;
-          const moveY = ((y - height / 2) / height) * 50 * depth;
-
+          const moveX = ((x - width / 2) / width) * 40 * depth;
+          const moveY = ((y - height / 2) / height) * 40 * depth;
           shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-      });
-
-      document.addEventListener('mouseleave', () => {
-        shapes.forEach(shape => {
-          shape.style.transform = 'translate(0, 0)';
         });
       });
     });
