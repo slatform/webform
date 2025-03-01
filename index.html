@@ -9,13 +9,13 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif; /* Fallback font, no external dependency */
+      font-family: Arial, sans-serif;
     }
     html, body {
       height: 100%;
       width: 100%;
       overflow: hidden;
-      background: linear-gradient(135deg, #2b5876, #4e4376);
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* Black to deep purple/blue */
       animation: gradientShift 20s ease infinite;
     }
     body::before {
@@ -25,7 +25,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #2b5876; /* Fallback if gradient fails */
+      background: #1a1a2e; /* Fallback dark */
       z-index: -1;
     }
     #scene {
@@ -36,9 +36,9 @@
     }
     .shape {
       position: absolute;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Darker shadow */
       transition: transform 0.1s ease;
     }
     .sphere {
@@ -46,7 +46,7 @@
       height: 160px;
       top: 15%;
       left: 20%;
-      background: radial-gradient(circle at 30% 30%, #ffffff33, #2b5876);
+      background: radial-gradient(circle at 30% 30%, #ffffff22, #16213e);
       animation: float 6s ease-in-out infinite;
     }
     .cube {
@@ -54,7 +54,7 @@
       height: 130px;
       top: 65%;
       left: 70%;
-      background: linear-gradient(45deg, #4e4376, #2b5876);
+      background: linear-gradient(45deg, #0f3460, #16213e);
       transform: rotate(45deg);
       border-radius: 15px;
       animation: float 8s ease-in-out infinite reverse;
@@ -64,7 +64,7 @@
       height: 220px;
       top: 40%;
       left: 35%;
-      background: radial-gradient(circle, #ffffff22, #4e4376);
+      background: radial-gradient(circle, #ffffff18, #0f3460);
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
       animation: float 7s ease-in-out infinite;
     }
@@ -73,7 +73,7 @@
       height: 90px;
       top: 75%;
       left: 85%;
-      background: radial-gradient(circle at 70% 70%, #ffffff44, #2b5876);
+      background: radial-gradient(circle at 70% 70%, #ffffff33, #1a1a2e);
       animation: float 5s ease-in-out infinite reverse;
     }
     header {
@@ -91,35 +91,39 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 3px;
-      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
     }
     p {
       font-size: 1.6rem;
       font-weight: 300;
       margin-top: 15px;
-      color: #e0e7ff;
+      color: #d8e0ff; /* Lighter for contrast on dark bg */
     }
     nav {
       position: absolute;
-      top: 30px;
+      top: 20px; /* Slightly lower for mobile visibility */
       width: 100%;
+      max-width: 100vw; /* Prevent overflow */
       display: flex;
+      flex-wrap: wrap; /* Allow wrapping on small screens */
       justify-content: center;
-      gap: 50px;
+      gap: 20px; /* Tighter gap for mobile */
+      padding: 10px; /* Add padding to avoid edge clipping */
       opacity: 0;
       transition: opacity 0.5s ease;
+      z-index: 20; /* Above shapes */
     }
     nav a {
       color: #fff;
       font-size: 1.3rem;
       text-decoration: none;
       font-weight: 600;
-      padding: 10px 25px;
+      padding: 8px 20px;
       border-radius: 30px;
       transition: background 0.3s, transform 0.3s;
     }
     nav a:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.2);
       transform: scale(1.05);
     }
     @keyframes float {
@@ -137,12 +141,30 @@
       h1 { font-size: 4rem; }
       p { font-size: 1.3rem; }
       .shape { transform: scale(0.8); }
-      nav a { font-size: 1.1rem; padding: 8px 20px; }
+      nav { 
+        gap: 15px; 
+        padding: 15px; 
+        top: 10px; 
+      }
+      nav a { 
+        font-size: 1.1rem; 
+        padding: 6px 15px; 
+      }
     }
     @media (max-width: 480px) {
       h1 { font-size: 2.8rem; }
       p { font-size: 1rem; }
       .shape { transform: scale(0.6); }
+      nav { 
+        flex-direction: column; /* Stack on very small screens */
+        gap: 10px; 
+        padding: 10px; 
+        top: 5px; 
+      }
+      nav a { 
+        font-size: 1rem; 
+        padding: 5px 12px; 
+      }
     }
   </style>
 </head>
